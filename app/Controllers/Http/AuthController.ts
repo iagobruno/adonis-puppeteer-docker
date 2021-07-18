@@ -1,13 +1,17 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Env from '@ioc:Adonis/Core/Env'
 import User from 'App/Models/User'
 
 export default class AuthController {
 
   public async redirect({ ally }: HttpContextContract) {
-    return ally.use('github').redirect()
+    return ally.use('github').redirect(req => {
+      const callbackUrl = `http://localhost:${Env.get('PORT')}/auth/callback`
+      req.param('redirect_uri', callbackUrl)
+    })
   }
 
-  public async callback({ auth, ally }: HttpContextContract) {
+  public async callback({ auth, ally, response }: HttpContextContract) {
     const github = ally.use('github')
 
     /**
@@ -38,10 +42,12 @@ export default class AuthController {
    * a new one
    */
     const user = await User.firstOrCreate({
-      email: githubUser.email!,
+      githubId: githubUser.id,
     }, {
       name: githubUser.name,
+      email: githubUser.email!,
       accessToken: githubUser.token.token,
+      githubId: githubUser.id,
     })
 
     /**
@@ -49,7 +55,7 @@ export default class AuthController {
      */
     await auth.use('web').login(user)
 
-    return `Hello, ${user.name}!`
+    return response.redirect().toRoute('home')
   }
 
 }
