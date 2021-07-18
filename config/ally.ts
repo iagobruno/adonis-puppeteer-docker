@@ -18,17 +18,18 @@ import { AllyConfig } from '@ioc:Adonis/Addons/Ally'
 |
 */
 const allyConfig: AllyConfig = {
-	/*
-	|--------------------------------------------------------------------------
-	| Github driver
-	|--------------------------------------------------------------------------
-	*/
-	github: {
-		driver: 'github',
-		clientId: Env.get('GITHUB_CLIENT_ID'),
-		clientSecret: Env.get('GITHUB_CLIENT_SECRET'),
-		callbackUrl: 'http://localhost:3333/github/callback',
-	},
+  /*
+  |--------------------------------------------------------------------------
+  | Github driver
+  |--------------------------------------------------------------------------
+  */
+  github: {
+    driver: 'github',
+    clientId: Env.get('GITHUB_CLIENT_ID'),
+    clientSecret: Env.get('GITHUB_CLIENT_SECRET'),
+    callbackUrl: 'http://localhost:3333/auth/callback',
+  },
+
 }
 
 export default allyConfig

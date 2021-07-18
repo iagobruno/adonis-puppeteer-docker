@@ -11,6 +11,9 @@ import Route from '@ioc:Adonis/Core/Route'
 import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import Env from '@ioc:Adonis/Core/Env'
 
+Route.get('/auth/redirect', 'AuthController.redirect')
+Route.get('/auth/callback', 'AuthController.callback')
+
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
