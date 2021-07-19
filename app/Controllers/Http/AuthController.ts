@@ -46,6 +46,7 @@ export default class AuthController {
     }, {
       name: githubUser.name,
       email: githubUser.email!,
+      avatarUrl: githubUser.avatarUrl ?? undefined,
       accessToken: githubUser.token.token,
       githubId: githubUser.id,
     })

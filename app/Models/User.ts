@@ -14,6 +14,9 @@ export default class User extends BaseModel {
   public name: string
 
   @column()
+  public avatarUrl?: string
+
+  @column()
   public githubId: string
 
   @column()

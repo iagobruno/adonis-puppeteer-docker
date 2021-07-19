@@ -1,0 +1,28 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'); */
+@import url('https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css');
+
+html, body {
+  background-color: #F7F8FA;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  color: #46444c;
+  position: relative;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #5A45FF;
+  text-decoration: none;
+}
+
+.table>:not(:last-child)>:last-child>* {
+  border-bottom-color: rgb(222, 226, 230)!important;
+}
+
+.table>tbody>tr {
+  vertical-align: middle;
+}

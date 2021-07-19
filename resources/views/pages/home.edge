@@ -1,0 +1,48 @@
+@layout('layouts/main')
+
+@set('title', 'Latest discussions')
+
+@section('content')
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Latest discussions</h2>
+    <a class="btn btn-primary btn-sm" href="/new" role="button">New Discussion</a>
+  </div>
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">Replies</th>
+        <th scope="col">Views</th>
+        <th scope="col">Activity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="py-3">
+          <div class="d-flex flex-column gap-1">
+            <strong>[v4] How can i build a local docker development env for Adonis?</strong>
+            <div>🐳 Docker</div>
+          </div>
+        </td>
+        <td class="py-3">
+          <img src="https://avatars.githubusercontent.com/u/1814990?s=40&v=4" class="rounded-circle" height="20" width="20">
+        </td>
+        <td class="py-3">6</td>
+        <td class="py-3">200</td>
+        <td class="py-3">2h</td>
+      </tr>
+      <tr>
+        <td class="py-3">serve --watch stops working when an exception occur on windows</td>
+        <td class="py-3">
+          <img src="https://sea1.discourse-cdn.com/github/user_avatar/github.community/francisfuzz/50/3348_2.png" class="rounded-circle" height="20" width="20">
+        </td>
+        <td class="py-3">2</td>
+        <td class="py-3">50</td>
+        <td class="py-3">6h</td>
+      </tr>
+    </tbody>
+  </table>
+@endsection

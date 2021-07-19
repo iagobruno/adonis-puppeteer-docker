@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+  <div class="container d-flex align-items-center">
+    <a class="navbar-brand" href="/">{{ site_name }}</a>
+
+    <ul class="navbar-nav flex-row flex-wrap me-auto">
+      <li class="nav-item">
+        <a class="nav-link px-2" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link px-2" href="/">Topics</a>
+      </li>
+      {{--  <li class="nav-item">
+        <a class="nav-link px-2" href="#">Disabled</a>
+      </li>  --}}
+    </ul>
+
+    <div class="d-flex">
+    @if(auth.isLoggedIn)
+      <img src="{{ auth.user.avatarUrl }}" class="rounded-circle" height="30" width="30">
+    @else
+      <a class="btn btn-primary btn-sm" href="{{ route('AuthController.redirect') }}" role="button">Login</a>
+    @endif
+    </div>
+  </div>
+</nav>
