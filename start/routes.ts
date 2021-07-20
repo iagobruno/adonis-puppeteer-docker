@@ -12,7 +12,7 @@ import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import Env from '@ioc:Adonis/Core/Env'
 
 Route.get('/auth/github', 'AuthController.redirect')
-Route.get('/auth/callback', 'AuthController.callback')
+Route.get('/auth/github/callback', 'AuthController.callback')
 
 Route.on('/').render('pages/home').as('home')
 

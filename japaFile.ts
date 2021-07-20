@@ -54,12 +54,15 @@ async function closeDatabaseConnection() {
 
 async function startBrowser() {
   if (global.BROWSER) await closeBrowser()
-
   console.log('Launching Puppeteer...')
 
+  const isInsideDockerContainer = process.platform === 'linux'
+  const executablePath = isInsideDockerContainer ? '/usr/bin/chromium-browser' : undefined
+
   global.BROWSER = await puppeteer.launch({
-    headless: true,
-    // slowMo: 10, // Slows down Puppeteer operations by the specified amount of milliseconds to aid debugging.
+    executablePath,
+    args: ['--no-sandbox', '--disable-gpu'],
+    slowMo: 0,
   })
 }
 

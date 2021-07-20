@@ -6,7 +6,7 @@ export default class AuthController {
 
   public async redirect({ ally }: HttpContextContract) {
     return ally.use('github').redirect(req => {
-      const callbackUrl = `http://localhost:${Env.get('PORT')}/auth/callback`
+      const callbackUrl = `http://localhost:${Env.get('PORT')}/auth/github/callback`
       req.param('redirect_uri', callbackUrl)
     })
   }

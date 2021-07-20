@@ -1,0 +1,7 @@
+node_modules
+build
+Dockerfile
+docker-compose.yml
+.dockerignore
+yarn-error.log
+.git
