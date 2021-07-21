@@ -1,6 +1,6 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Database from '@ioc:Adonis/Lucid/Database'
-import { cleanUpDatabase } from '../../tests/_helpers'
+import { cleanUpDatabase } from '../../tests/helpers'
 import UserFactory from 'Database/factories/UserFactory'
 
 export default class DatabaseSeeder extends BaseSeeder {

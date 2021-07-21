@@ -2,7 +2,7 @@ import test from 'japa'
 import { expect } from 'chai'
 import type { Page, BrowserContext } from 'puppeteer'
 import Env from '@ioc:Adonis/Core/Env'
-import { cleanUpDatabase } from './_helpers'
+import { cleanUpDatabase } from '../helpers'
 
 test.group('/auth/github', (group) => {
   let page: Page

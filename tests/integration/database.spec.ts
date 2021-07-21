@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import Database from '@ioc:Adonis/Lucid/Database'
 import UserFactory from 'Database/factories/UserFactory'
-import { cleanUpDatabase } from './_helpers'
+import { cleanUpDatabase } from '../helpers'
 
 test.group('Banco de dados', () => {
 
