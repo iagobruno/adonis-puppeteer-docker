@@ -1,8 +1,10 @@
-import { BaseModel, belongsTo, BelongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import uuid from 'App/Helpers/uuidDecorator'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
+import type { TransactionClientContract } from '@ioc:Adonis/Lucid/Database'
 import User from './User'
+import Answer, { AnswerAttributes } from './Answer'
 
 export default class Question extends BaseModel {
   @column({ isPrimary: true })
@@ -27,6 +29,9 @@ export default class Question extends BaseModel {
   public answered: boolean
 
   @column()
+  public bestAnswerId?: string
+
+  @column()
   public answersCount: number
 
   @column()
@@ -47,14 +52,27 @@ export default class Question extends BaseModel {
     foreignKey: 'authorId'
   })
   public author: BelongsTo<typeof User>
+
+  @hasMany(() => Answer)
+  public answers: HasMany<typeof Answer>
   //#endregion Relationships
 
 
   //#region Methods
-  public async markAsAnswered() {
-    this.answered = true
-    this.answered_at = DateTime.local().toUTC()
-    await this.save()
+  public async reply(user: User, data: AnswerAttributes, $trx?: TransactionClientContract) {
+    const question = this as Question
+    if ($trx) question.useTransaction($trx)
+
+    const answer = await question.related('answers').create({
+      authorId: user.id,
+      questionId: question.id,
+      ...data
+    })
+
+    question.answersCount++
+    await question.save()
+
+    return answer
   }
   //#endregion
 }
