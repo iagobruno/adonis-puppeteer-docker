@@ -16,16 +16,17 @@ services:
 
   db:
     image: postgres:13-alpine
-    container_name: pgsql-container
+    container_name: db-container
     restart: always
     ports:
-      - 5432:5432
+      # outside-docker:inside-docker
+      - 9876:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: discussions-forum-db
+      POSTGRES_DB: forum-db
 
 volumes:
   pgdata:

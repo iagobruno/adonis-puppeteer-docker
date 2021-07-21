@@ -2,8 +2,14 @@ import 'reflect-metadata'
 import japa from 'japa'
 import { join } from 'path'
 import getPort from 'get-port'
+import execa from 'execa'
 import sourceMapSupport from 'source-map-support'
 import puppeteer from 'puppeteer'
+
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') {
+  console.error("It's not allowed to run tests in production environment as tests has destructive sql operations.")
+  process.exit(1)
+}
 
 process.env.NODE_ENV = 'testing'
 process.env.ADONIS_ACE_CWD = join(__dirname)
@@ -18,10 +24,12 @@ japa.configure({
   before: [
     startBrowser,
     startHttpServer,
+    runMigrations,
   ],
   after: [
     closeBrowser,
     closeDatabaseConnection,
+    rollbackMigrations,
   ],
   bail: true,
   timeout: 1000 * 25,
@@ -69,4 +77,20 @@ async function startBrowser() {
 async function closeBrowser() {
   await global.BROWSER?.close()
   global.BROWSER = null
+}
+
+async function runMigrations() {
+  console.log('Running migrations...')
+
+  await execa.node('ace', ['migration:run'], {
+    stdio: 'inherit',
+  })
+}
+
+async function rollbackMigrations() {
+  console.log('Rollbacking migrations...')
+
+  await execa.node('ace', ['migration:rollback'], {
+    stdio: 'inherit',
+  })
 }

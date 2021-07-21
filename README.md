@@ -76,6 +76,32 @@ Running inside Docker container:
 
 > TIP: You can create a `.env.testing` file at the project root to define/change variables that will only be used during testing.
 
+<details>
+  <summary>How to create a Postgres container to run tests</summary>
+
+  ```bash
+  # Create a postgres container
+  > docker run -d --name postgres-container -p 6789:5432 -e POSTGRES_PASSWORD=1234 postgres:13-alpine
+  # Create a docker netwotk
+  > docker network create pg-network
+  # Connect the containers to allow node-container access postgres-container
+  > docker network connect pg-network node-container && docker network connect pg-network postgres-container
+  ```
+
+  Then create/change the .env.testing file with these values:
+
+  ```env
+  NODE_ENV=testing
+
+  DB_CONNECTION=pg
+  PG_HOST=postgres-container
+  PG_PORT=5432
+  PG_USER=postgres
+  PG_PASSWORD=1234
+  PG_DB_NAME=postgres
+  ```
+</details>
+
 ## Deployment
 
 This project can be deployed to any cloud service that supports Docker.

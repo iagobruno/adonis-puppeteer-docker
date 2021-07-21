@@ -47,6 +47,11 @@ const databaseConfig: DatabaseConfig = {
       },
       healthCheck: true,
       debug: false,
+      pool: {
+        afterCreate(conn, done) {
+          conn.query("SET TIME ZONE 'UTC';", (err) => done(err, conn))
+        }
+      }
     },
 
   }

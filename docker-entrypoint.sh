@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "Running migrations..."
 # node ace migration:rollback --batch 0
 node ace migration:run
 
