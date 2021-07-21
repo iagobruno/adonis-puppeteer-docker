@@ -33,6 +33,7 @@ Then open http://localhost:3333/ in your browser.
 ```bash
 > docker-compose up -d --build
 > docker logs node-container --follow
+> docker exec -it node-container /bin/sh
 ```
 
 ## Ace commands

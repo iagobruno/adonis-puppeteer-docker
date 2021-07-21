@@ -1,5 +1,6 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import User from 'App/Models/User'
+import QuestionFactory from './QuestionFactory'
 
 const UserFactory = Factory.define(User, ({ faker }) => {
   return {
@@ -9,6 +10,7 @@ const UserFactory = Factory.define(User, ({ faker }) => {
     githubId: faker.datatype.uuid()
   }
 })
+  .relation('questions', () => QuestionFactory)
   .build()
 
 export default UserFactory
