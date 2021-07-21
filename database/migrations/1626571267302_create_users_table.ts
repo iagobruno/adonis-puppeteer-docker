@@ -9,7 +9,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('email', 255).notNullable()
       table.string('name', 255).notNullable()
       table.string('avatar_url', 255).nullable()
-      table.string('github_id').notNullable().index()
+      table.string('github_id').nullable().index()
       table.string('access_token').nullable()
       table.string('remember_me_token').nullable()
 
